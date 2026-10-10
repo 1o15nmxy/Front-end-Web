@@ -7,4 +7,4 @@ I explored the bento box design a bit by looking at designs on Drrible:
 
 https://dribbble.com/tags/bento-box.
 
-I thought the bento box design is something that I see a lot but I have never took time to really think about it. It is very clean and it emphasize what is important through rectangle sizes. I think it's just a good way to hel[ user have  a big picture of all infomration but also have organization. It's a design I really like and I hope to implement it in future projects. ]
+I thought the bento box design is something that I see a lot but I have never took time to really think about it. It is very clean and it emphasize what is important through rectangle sizes. I think it's just a good way to help user have  a big picture of all infomration but also have organization. It's a design I really like and I hope to implement it in future projects. 
