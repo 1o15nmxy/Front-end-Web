@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Archive</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Welcome screen -->
+  <section id="welcome">
+    <h1>What do you remember?</h1>
+    <p class="welcome-note">Your archive of dreams and fragments</p>
+    <button class="button" onclick="showApp('record')">Enter the Archive</button>
+  </section>
+
+  <!-- Main website -->
+  <div id="app">
+    <nav>
+      <button class="logo" onclick="showWelcome()">Dream Archive</button>
+      <div class="nav-links">
+        <button onclick="showPage('web')" id="nav-web">Dream Web</button>
+        <button onclick="showPage('logs')" id="nav-logs">Journal Logs</button>
+        <button onclick="showPage('insights')" id="nav-insights">Insights</button>
+        <button onclick="showPage('record')" id="nav-record">New Dream</button>
+      </div>
+    </nav>
+
+    <main>
+      <section id="record" class="page active">
+        <div class="form-wrap">
+          <p class="eyebrow">ENTRY 001 / UNFINISHED MEMORY</p>
+          <h2>Jot Down Your Dream</h2>
+          <p class="muted">Write down whatever you can remember. It doesn't have to make sense.</p>
+
+          <label for="date">Date</label>
+          <input id="date" type="date">
+
+          <label for="details">What do you remember?</label>
+          <textarea id="details" placeholder="Fragments, feelings, places, people... "></textarea>
+
+          <label for="words">Words or symbols</label>
+          <input id="words" type="text" placeholder="water, staircase, blue light...">
+
+          <button class="button" type="button" onclick="showPage('web')">Save to Archive</button>
+        </div>
+      </section>
+
+      <!-- Static visual placeholder for the dream web -->
+      <section id="web" class="page">
+        <h2>Dream Web</h2>
+        <div class="dream-web-art" aria-label="A visual web of connected dream words">
+          <svg viewBox="0 0 800 600" role="img" aria-label="Dream words connected by fine lines">
+            <g class="web-lines">
+              <line x1="220" y1="115" x2="580" y2="105" />
+              <line x1="220" y1="115" x2="100" y2="220" />
+              <line x1="220" y1="115" x2="260" y2="340" />
+    
+              <line x1="580" y1="105" x2="620" y2="315" />
+  
+              <line x1="620" y1="315" x2="260" y2="340" />
+              <line x1="620" y1="315" x2="620" y2="400" />
+
+              <line x1="260" y1="340" x2="100" y2="220" />
+            </g>
+      
+            <!-- Nodes / Circles -->
+            <g class="web-dots">
+              <circle cx="220" cy="115" r="35" />
+              <circle cx="580" cy="105" r="35" />
+              <circle cx="100" cy="220" r="35" />
+              <circle cx="620" cy="315" r="35" />
+              <circle cx="260" cy="340" r="35" />
+              <circle cx="620" cy="400" r="35" />
+            </g>
+      
+            <!-- Labels centered perfectly inside circles -->
+            <g class="web-labels">
+              <text x="220" y="120">rain</text>
+              <text x="580" y="110">water</text>
+              <text x="100" y="225">night</text>
+              <text x="620" y="320">memory</text>
+              <text x="260" y="345">distance</text>
+              <text x="620" y="405">echo</text>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Static example entries -->
+      <section id="logs" class="page">
+        <h2>Journal Logs</h2>
+
+        <article class="entry">
+          <p class="entry-date">OCTOBER 19, 2026</p>
+          <h3>The Endless Staircase</h3>
+          <p>There's a staircase where I keep walking up towards and I woke up afterwards</p>
+          <p class="entry-words">staircase · infinity</p>
+        </article>
+        <article class="entry">
+          <p class="entry-date">OCTOBER 12, 2026</p>
+          <h3>Flooded room</h3>
+          <p>My room was flooded and I was standing in the kitchen. </p>
+          <p class="entry-words">water · kitchen</p>
+        </article>
+        <article class="entry">
+          <p class="entry-date">SEPTEMBER 28, 2026</p>
+          <h3>I went to Hawaii</h3>
+          <p>I took a trip to Hawaii and I was at the beach. The weather was very good. </p>
+          <p class="entry-words">Vacation</p>
+        </article>
+      </section>
+
+
+      <!-- Static insights placeholder -->
+      <section id="insights" class="page">
+        <h2>Insights</h2>
+        <div class="insight-grid">
+          <article class="insight-card">
+            <p class="muted">All ov your entires so far.</p>
+            <h3>3 Records</h3>
+
+          </article>
+          <article class="insight-card">
+            <p class="muted">Your repeating themes.</p>
+            <h3>Water, Vacation</h3>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
