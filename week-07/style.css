@@ -1,0 +1,48 @@
+
+body {
+    margin: 0;
+    background: #f3eee4;
+    color: #211546;
+    font-family: Arial, sans-serif;
+  }
+  
+  main {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .card {
+    margin: 35px 0 20px;
+    padding: 60px 20px;
+    min-height: 150px;
+    background: white;
+    color: #211546;
+    border: 1px solid #c8bbd9;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  
+  /* The card changes color when showing the fact */
+  .card.flipped {
+    background: #e4dcef;
+  }
+  
+  
+  .card h2 {
+    font-size: 32px;
+  }
+  
+  .card p {
+    line-height: 1.6;
+  }
+  
+  button {
+    padding: 12px 24px;
+    background: #211546;
+    color: #f3eee4;
+    border: none;
+    cursor: pointer;
+  }
+  
