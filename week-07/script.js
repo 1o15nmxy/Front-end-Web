@@ -31,8 +31,6 @@ const foods = [
   const nextButton = document.querySelector("#next-button");
   
   // Flip the card when it is clicked.
-
-
   card.addEventListener("click", function () {
     showingFact = !showingFact;
   
