@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Birthday Reading</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ===================== Page 1: ask for the birthday ===================== -->
+  <div id="intro" class="screen intro">
+
+    <h1>Enter your birthday</h1>
+
+    <form id="birthday-form">
+
+    <p id="hint" class="hint" aria-live="polite">Choose a date to begin.</p>
+      <input type="date" id="birthday">
+      <button type="submit" id="reveal" disabled>Reveal</button>
+    </form>
+
+    <!-- A list that grows each time someone gets a reading -->
+    <section id="history-section" class="history-section" hidden>
+      <h3>Birthdays you've read</h3>
+      <ul id="history"></ul>
+      <button type="button" id="clear">Clear the list</button>
+    </section>
+
+  </div>
+
+
+  <!-- ===================== Page 2: the reading ===================== -->
+  <div id="reading" class="screen reading" hidden>
+
+    <button type="button" id="back" class="back-btn">← Enter another birthday</button>
+
+    <p id="born-on" class="eyebrow"></p>
+    <h1 id="reading-title" tabindex="-1">Your birthday reading</h1>
+
+    <!-- Constellation -->
+    <section class="reading-section">
+      <h2>Your constellation</h2>
+
+      <!-- Flashcard: click (or press Enter/Space) to flip it over -->
+      <div id="card" class="card" role="button" tabindex="0" aria-pressed="false">
+        <div class="card-inner">
+
+          <div class="face front">
+            <p id="symbol" class="symbol"></p>
+            <h3 id="sign-name"></h3>
+            <p id="sign-dates" class="dates"></p>
+            <p class="flip-cue">✦ Tap the card to read your stars ✦</p>
+          </div>
+
+          <div class="face back" aria-hidden="true">
+            <p id="message" class="message"></p>
+            <p id="trait" class="trait"></p>
+            <p class="flip-cue">✦ Tap to flip back ✦</p>
+          </div>
+
+        </div>
+      </div>
+
+      <p id="card-hint" class="hint" aria-live="polite">Tap the card to reveal your message.</p>
+    </section>
+
+    <!-- Birthstone -->
+    <section class="reading-section">
+      <h2>Your birthstone</h2>
+
+      <div class="stone-result">
+        <div id="gem" class="gem" role="img"></div>
+        <h3 id="stone-name"></h3>
+        <p id="stone-month" class="dates"></p>
+        <p id="stone-meaning" class="trait"></p>
+        <p id="stone-alt" class="stone-alt"></p>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

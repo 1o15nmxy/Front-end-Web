@@ -1,0 +1,34 @@
+body {
+    background-color: #17172e;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 300px;
+  }
+
+  
+  h1 {
+    font-size: 36px;
+  }
+
+  input, button {
+    padding: 12px;
+    margin: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: url("imresizer-resize-star.webp"), auto;
+  }
+
+  button {
+    background-color: #b9a5ff;
+    cursor: url("imresizer-resize-star.webp"), auto;
+  }
+
+  #result {
+    margin-top: 40px;
+    font-size: 24px;
+  }
+
+  body {
+    cursor: url("imresizer-resize-star.webp"), auto;
+  }

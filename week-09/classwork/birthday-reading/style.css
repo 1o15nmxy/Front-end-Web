@@ -1,0 +1,284 @@
+body {
+  background-color: #17172e;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0 16px 80px;
+  cursor: url("imresizer-resize-star.webp"), auto;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h1:focus {
+  outline: none;
+}
+
+/* ----- Screens (the two "pages") ----- */
+.screen {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.intro {
+  padding-top: 200px;
+}
+
+.reading {
+  padding-top: 40px;
+}
+
+/* Each screen fades up when it appears */
+.screen.enter {
+  animation: screen-in 0.7s ease-out;
+}
+
+@keyframes screen-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ----- Form ----- */
+label {
+  display: block;
+  margin-top: 20px;
+  color: #cfc6ff;
+}
+
+input,
+button {
+  padding: 12px;
+  margin: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: url("imresizer-resize-star.webp"), auto;
+}
+
+button {
+  background-color: #b9a5ff;
+  color: #17172e;
+  transition: background-color 0.3s, opacity 0.3s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #d8ccff;
+}
+
+/* A disabled button looks clearly "not ready yet" */
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Feedback lines */
+.hint {
+  color: #a9a9c9;
+  min-height: 1.2em;
+}
+
+.hint.error {
+  color: #ff9db0;
+}
+
+/* ----- History list on page 1 ----- */
+.history-section {
+  margin-top: 50px;
+}
+
+#history {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#history button,
+.back-btn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #b9a5ff;
+}
+
+#history button:hover,
+.back-btn:hover {
+  background-color: #2e2560;
+}
+
+/* ----- Page 2 ----- */
+.back-btn {
+  display: block;
+  margin: 0 0 30px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #b9a5ff;
+}
+
+.reading h1 {
+  margin-top: 8px;
+}
+
+.reading-section {
+  margin-top: 50px;
+}
+
+.reading-section + .reading-section {
+  padding-top: 40px;
+  border-top: 1px solid #2e2e55;
+}
+
+.reading-section h2 {
+  font-size: 22px;
+  font-weight: normal;
+  color: #cfc6ff;
+}
+
+/* ----- Flashcard ----- */
+.card {
+  max-width: 420px;
+  margin: 0 auto;
+  perspective: 1000px;          /* gives the flip its 3D depth */
+  border-radius: 12px;
+  outline: none;
+  cursor: url("imresizer-resize-star.webp"), pointer;
+}
+
+.card:focus-visible .face {
+  outline: 2px solid #d8ccff;
+  outline-offset: 4px;
+}
+
+.card-inner {
+  display: grid;                /* both faces share one cell, so the card fits the taller side */
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+/* The flipped state: JavaScript adds this class */
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.face {
+  grid-area: 1 / 1;
+  min-height: 240px;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #23234a;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.card:hover .face {
+  background-color: #2b2b58;
+}
+
+.back {
+  transform: rotateY(180deg);   /* starts facing away */
+  background-color: #2e2560;
+}
+
+.card:hover .back {
+  background-color: #372d70;
+}
+
+/* Extra glow when today is the visitor's birthday */
+.card.birthday .face {
+  box-shadow: 0 0 30px #b9a5ff;
+}
+
+.symbol {
+  font-size: 64px;
+  margin: 0;
+}
+
+.face h3,
+.stone-result h3 {
+  font-size: 28px;
+  margin: 10px 0 4px;
+}
+
+.dates {
+  color: #a9a9c9;
+  margin-top: 0;
+}
+
+.message {
+  font-size: 22px;
+  margin-top: 0;
+}
+
+.trait {
+  font-style: italic;
+  color: #e6e0ff;
+  line-height: 1.5;
+}
+
+.flip-cue {
+  margin: 18px 0 0;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #b9a5ff;
+}
+
+/* ----- Birthstone ----- */
+.stone-result {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #23234a;
+}
+
+.gem {
+  width: 160px;
+  height: 140px;
+  margin: 0 auto;
+}
+
+.gem svg,
+.gem img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* The gem pops in and glows in its own color (set by JavaScript) */
+.gem.sparkle {
+  animation: gem-in 0.9s ease-out 0.3s both;
+  filter: drop-shadow(0 0 18px var(--glow, #b9a5ff));
+}
+
+@keyframes gem-in {
+  0%   { transform: scale(0.5) rotate(-12deg); opacity: 0; }
+  60%  { transform: scale(1.12) rotate(4deg);  opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.stone-alt {
+  font-size: 14px;
+  color: #a9a9c9;
+}
+
+/* Visitors who prefer less motion get instant changes */
+@media (prefers-reduced-motion: reduce) {
+  .card-inner {
+    transition: none;
+  }
+  .screen.enter,
+  .gem.sparkle {
+    animation: none;
+  }
+}
