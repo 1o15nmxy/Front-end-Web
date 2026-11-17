@@ -1,0 +1,579 @@
+/* =====================================================================
+   Colors used all over the page, in one place so they're easy to change
+   ===================================================================== */
+:root {
+  --night:    #0f0f26;
+  --panel:    #1d1d42;
+  --lilac:    #b9a5ff;
+  --lilac-lt: #d8ccff;
+  --pink:     #ffb3e6;
+  --sky:      #7ad7ff;
+  --gold:     #ffe08a;
+  --muted:    #a9a9c9;
+  --text:     #f4f1ff;
+  --error:    #ff9db0;
+}
+
+body {
+  /* A night sky with soft colored "nebula" clouds */
+  background:
+    radial-gradient(ellipse at 15% 0%,   #4a2f9a66 0%, transparent 50%),
+    radial-gradient(ellipse at 95% 35%,  #1f5a8a55 0%, transparent 45%),
+    radial-gradient(ellipse at 40% 100%, #7a2a8a55 0%, transparent 55%),
+    var(--night);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: "Fredoka", Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0 16px 80px;
+  overflow-x: hidden;
+  cursor: url("imresizer-resize-star.webp"), auto;
+}
+
+h1 {
+  font-size: clamp(32px, 6vw, 46px);
+  font-weight: 700;
+  line-height: 1.15;
+  /* Shimmering rainbow-pastel text */
+  background: linear-gradient(90deg, var(--pink), var(--lilac), var(--sky), var(--gold), var(--pink));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 300% 0; }
+}
+
+h1:focus {
+  outline: none;
+}
+
+.lead {
+  color: var(--lilac-lt);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* ----- Sky: still stars in the background ----- */
+.sky {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+}
+
+/* ----- Screens (the two "pages") ----- */
+.screen {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.intro {
+  padding-top: 160px;
+}
+
+.reading {
+  padding-top: 40px;
+}
+
+/* Each screen fades up when it appears */
+.screen.enter {
+  animation: screen-in 0.7s ease-out;
+}
+
+@keyframes screen-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ----- Form ----- */
+label {
+  display: block;
+  margin-top: 24px;
+  color: var(--lilac-lt);
+  font-weight: 500;
+}
+
+input,
+button {
+  padding: 12px 22px;
+  margin: 10px;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 17px;
+  cursor: url("imresizer-resize-star.webp"), auto;
+}
+
+input[type="date"] {
+  background: #1d1d42;
+  color: var(--text);
+  border: 1px solid #b9a5ff77;
+  color-scheme: dark;     /* makes the calendar popup dark too */
+  box-shadow: inset 0 0 12px #b9a5ff22;
+}
+
+input[type="date"]:focus {
+  outline: none;
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px #ffb3e644, inset 0 0 12px #b9a5ff22;
+}
+
+button {
+  background: linear-gradient(135deg, var(--pink), var(--lilac) 50%, var(--sky));
+  background-size: 200% 200%;
+  color: #17172e;
+  font-weight: 600;
+  box-shadow: 0 4px 20px #b9a5ff55;
+  transition: transform 0.2s, box-shadow 0.3s, background-position 0.5s, opacity 0.3s;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.04);
+  background-position: 100% 100%;
+  box-shadow: 0 6px 28px #ffb3e688;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--lilac-lt);
+  outline-offset: 3px;
+}
+
+/* A disabled button looks clearly "not ready yet" */
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Outline-style buttons (Back, Clear, history entries) */
+.ghost-btn,
+#history button {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--lilac);
+  box-shadow: none;
+  font-weight: 500;
+}
+
+.ghost-btn:hover:not(:disabled),
+#history button:hover {
+  background: #2e2560;
+  box-shadow: 0 0 16px #b9a5ff55;
+}
+
+/* Feedback lines */
+.hint {
+  color: var(--muted);
+  min-height: 1.2em;
+}
+
+.hint.error {
+  color: var(--error);
+}
+
+/* ----- History list on page 1 ----- */
+.history-section {
+  margin-top: 50px;
+}
+
+.history-section h3 {
+  color: var(--lilac-lt);
+  font-weight: 500;
+}
+
+#history {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#history button {
+  font-size: 15px;
+  padding: 8px 16px;
+  margin: 6px;
+}
+
+/* ----- Page 2 ----- */
+.back-btn {
+  display: block;
+  margin: 0 0 30px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--lilac);
+}
+
+.reading h1 {
+  margin-top: 8px;
+}
+
+.reading-section {
+  margin-top: 50px;
+}
+
+/* A row of little stars between sections */
+.reading-section + .reading-section::before {
+  content: "✦  ✧  ✦";
+  display: block;
+  margin-bottom: 40px;
+  color: #b9a5ff88;
+  letter-spacing: 6px;
+}
+
+.reading-section h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--lilac-lt);
+}
+
+/* Shared look for the "glass" boxes */
+.panel {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #26265aee, #19193cee);
+  border: 1px solid #ffffff1a;
+  box-shadow: 0 12px 40px #00000066;
+}
+
+/* ----- Flashcard ----- */
+.card {
+  max-width: 420px;
+  margin: 0 auto;
+  perspective: 1000px;          /* gives the flip its 3D depth */
+  border-radius: 20px;
+  outline: none;
+  transition: transform 0.3s;
+  cursor: url("imresizer-resize-star.webp"), pointer;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card:focus-visible .face {
+  outline: 2px solid var(--lilac-lt);
+  outline-offset: 4px;
+}
+
+.card-inner {
+  display: grid;                /* both faces share one cell, so the card fits the taller side */
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 1.4, 0.5, 1);   /* a little bounce at the end */
+}
+
+/* The flipped state: JavaScript adds this class */
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: relative;
+  overflow: hidden;
+  grid-area: 1 / 1;
+  min-height: 260px;
+  padding: 30px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #2f2f6e, #1b1b45);
+  border: 1px solid #b9a5ff55;
+  box-shadow: 0 12px 40px #00000066, inset 0 0 40px #b9a5ff22;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: box-shadow 0.3s;
+}
+
+.card:hover .face {
+  box-shadow: 0 16px 50px #00000077, inset 0 0 50px #b9a5ff33, 0 0 24px #b9a5ff44;
+}
+
+.back {
+  transform: rotateY(180deg);   /* starts facing away */
+  background: linear-gradient(160deg, #6a2f8a, #2e2560 60%, #1f3a6e);
+  border-color: #ffb3e666;
+}
+
+/* Extra glow when today is the visitor's birthday */
+.card.birthday .face {
+  box-shadow: 0 0 40px var(--pink), inset 0 0 40px #ffb3e633;
+}
+
+.symbol {
+  font-size: 72px;
+  margin: 0;
+  color: var(--gold);
+  text-shadow: 0 0 24px #ffe08aaa;
+  animation: bob 3s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+.face h3,
+.panel h3 {
+  font-size: 30px;
+  font-weight: 600;
+  margin: 10px 0 4px;
+}
+
+.dates {
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.message {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 0;
+}
+
+.trait {
+  font-style: italic;
+  color: #e6e0ff;
+  line-height: 1.5;
+}
+
+.flip-cue {
+  margin: 18px 0 0;
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--lilac);
+}
+
+/* ----- Moon ----- */
+.moon {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 22px #fff3c288);
+  animation: bob 5s ease-in-out infinite;
+}
+
+.moon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ----- Birthstone ----- */
+.gem {
+  width: 160px;
+  height: 140px;
+  margin: 0 auto;
+}
+
+.gem svg,
+.gem img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* The gem pops in, glows in its own color (set by JavaScript), then floats */
+.gem.sparkle {
+  animation:
+    gem-in 0.9s ease-out 0.3s both,
+    float 4s ease-in-out 1.2s infinite;
+  filter: drop-shadow(0 0 18px var(--glow, #b9a5ff));
+}
+
+@keyframes gem-in {
+  0%   { transform: scale(0.5) rotate(-12deg); opacity: 0; }
+  60%  { transform: scale(1.12) rotate(4deg);  opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50%      { transform: translateY(-8px) rotate(3deg); }
+}
+
+.stone-alt {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ----- Wikipedia & NASA info ----- */
+.wiki {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid #34346a;
+  text-align: left;
+}
+
+.apod {
+  text-align: left;
+}
+
+.apod .eyebrow,
+.apod .stone-alt {
+  text-align: center;
+}
+
+.wiki-status {
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.wiki-status.error {
+  color: var(--error);
+  font-style: normal;
+}
+
+.wiki-photo {
+  margin: 0 0 16px;
+}
+
+.wiki-photo img,
+.apod-photo img {
+  display: block;
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.apod-photo {
+  display: block;
+  margin: 14px 0 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 30px #7ad7ff33;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.apod-photo:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 40px #7ad7ff66;
+}
+
+.wiki h4,
+.apod h4 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--lilac-lt);
+}
+
+.wiki-text {
+  margin: 0;
+  line-height: 1.6;
+  color: #e6e0ff;
+}
+
+.wiki-credit {
+  margin: 14px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.wiki-credit a {
+  color: var(--lilac);
+}
+
+/* ----- Birthday twins ----- */
+.twins-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  text-align: left;
+}
+
+.twin {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: #ffffff0d;
+  border: 1px solid #ffffff12;
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.twin:hover {
+  background: #b9a5ff22;
+  transform: translateX(4px);
+}
+
+.twin-photo {
+  flex: none;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--lilac);
+  background: #2e2560;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.twin-name {
+  display: block;
+  font-weight: 600;
+}
+
+.twin-about {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.twin-year {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 1px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #ffb3e622;
+  color: var(--pink);
+}
+
+/* Visitors who prefer less motion get instant changes */
+@media (prefers-reduced-motion: reduce) {
+  .card-inner,
+  .card {
+    transition: none;
+  }
+  h1,
+  .symbol,
+  .moon,
+  .screen.enter,
+  .gem.sparkle {
+    animation: none;
+  }
+}

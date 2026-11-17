@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Birthday Reading</title>
+  <!-- A rounded, playful font from Google Fonts (falls back to Arial if offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Twinkling stars and shooting stars are added here by script.js -->
+  <div id="sky" class="sky" aria-hidden="true"></div>
+
+  <!-- ===================== Page 1: ask for the birthday ===================== -->
+  <div id="intro" class="screen intro">
+
+    <h1>What does your birthday hold?</h1>
+    <p class="lead">Enter your birthday.</p>
+
+    <form id="birthday-form">
+      <input type="date" id="birthday">
+      <button type="submit" id="reveal" disabled>✨ Reveal</button>
+    </form>
+
+    <p id="hint" class="hint" aria-live="polite">Choose a date to begin.</p>
+
+    <!-- A list that grows each time someone gets a reading -->
+    <section id="history-section" class="history-section" hidden>
+      <h3>Birthdays you've read</h3>
+      <ul id="history"></ul>
+      <button type="button" id="clear" class="ghost-btn">Clear the list</button>
+    </section>
+
+  </div>
+
+
+  <!-- ===================== Page 2: the reading ===================== -->
+  <div id="reading" class="screen reading" hidden>
+
+    <button type="button" id="back" class="back-btn ghost-btn">← Enter another birthday</button>
+
+    <p id="born-on" class="eyebrow"></p>
+    <h1 id="reading-title" tabindex="-1">Your birthday reading</h1>
+
+    <!-- Constellation -->
+    <section class="reading-section">
+      <h2><span aria-hidden="true">✨</span> Your constellation</h2>
+
+      <!-- Flashcard: click (or press Enter/Space) to flip it over -->
+      <div id="card" class="card" role="button" tabindex="0" aria-pressed="false">
+        <div class="card-inner">
+
+          <div class="face front">
+            <p id="symbol" class="symbol"></p>
+            <h3 id="sign-name"></h3>
+            <p id="sign-dates" class="dates"></p>
+            <p class="flip-cue">✦ Tap the card to read your stars ✦</p>
+          </div>
+
+          <div class="face back" aria-hidden="true">
+            <p id="message" class="message"></p>
+            <p id="trait" class="trait"></p>
+            <p class="flip-cue">✦ Tap to flip back ✦</p>
+          </div>
+
+        </div>
+      </div>
+
+      <p id="card-hint" class="hint" aria-live="polite">Tap the card to reveal your message.</p>
+    </section>
+
+    <!-- Moon phase (worked out in script.js, no internet needed) -->
+    <section class="reading-section">
+      <h2><span aria-hidden="true">🌙</span> Your moon</h2>
+
+      <div class="panel moon-result">
+        <div id="moon" class="moon" role="img"></div>
+        <h3 id="moon-name"></h3>
+        <p id="moon-light" class="dates"></p>
+        <p id="moon-meaning" class="trait"></p>
+      </div>
+    </section>
+
+    <!-- Birthstone -->
+    <section class="reading-section">
+      <h2><span aria-hidden="true">💎</span> Your birthstone</h2>
+
+      <div class="panel stone-result">
+        <div id="gem" class="gem" role="img"></div>
+        <h3 id="stone-name"></h3>
+        <p id="stone-month" class="dates"></p>
+        <p id="stone-meaning" class="trait"></p>
+        <p id="stone-alt" class="stone-alt"></p>
+
+        <!-- Filled in by script.js with an answer from Wikipedia -->
+        <div class="wiki" aria-live="polite">
+          <p id="wiki-status" class="wiki-status">Asking Wikipedia…</p>
+
+          <div id="wiki-body" hidden>
+            <figure id="wiki-photo" class="wiki-photo" hidden>
+              <img id="wiki-img" alt="">
+            </figure>
+            <h4 id="wiki-title"></h4>
+            <p id="wiki-text" class="wiki-text"></p>
+            <p class="wiki-credit">
+              From Wikipedia ·
+              <a id="wiki-link" href="#" target="_blank" rel="noopener">Read the full article</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NASA's Astronomy Picture of the Day for the birthday -->
+    <section class="reading-section">
+      <h2><span aria-hidden="true">🔭</span> The sky on your birthday</h2>
+
+      <div class="panel apod" aria-live="polite">
+        <p id="apod-status" class="wiki-status">Asking NASA…</p>
+
+        <div id="apod-body" hidden>
+          <p id="apod-date" class="eyebrow"></p>
+          <p id="apod-note" class="stone-alt" hidden></p>
+          <a id="apod-photo" class="apod-photo" href="#" target="_blank" rel="noopener" hidden>
+            <img id="apod-img" alt="">
+          </a>
+          <h4 id="apod-title"></h4>
+          <p id="apod-text" class="wiki-text"></p>
+          <p class="wiki-credit">
+            <span id="apod-credit"></span>NASA Astronomy Picture of the Day ·
+            <a id="apod-link" href="#" target="_blank" rel="noopener">See it on NASA's site</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Famous people born on the same day, from Wikipedia's "On this day" -->
+    <section class="reading-section">
+      <h2><span aria-hidden="true">🎂</span> Your birthday twins</h2>
+
+      <div class="panel twins" aria-live="polite">
+        <p id="twins-status" class="wiki-status">Looking up who else was born on your day…</p>
+        <ul id="twins" class="twins-list" hidden></ul>
+        <p id="twins-credit" class="wiki-credit" hidden>Famous birthdays from Wikipedia's "On this day"</p>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
