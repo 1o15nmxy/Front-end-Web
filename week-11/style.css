@@ -1,0 +1,23 @@
+.chart-row {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr) 50px;
+    gap: 12px;
+    align-items: center;
+    margin: 12px 0;
+  }
+  
+  .bar {
+    background: teal;
+    height: 24px;
+  }
+  
+  @media (max-width: 600px) {
+    .chart-row {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  
+    .bar {
+      max-width: 100%;
+    }
+  }

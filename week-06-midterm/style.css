@@ -1,0 +1,398 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #f7f4f1;
+  color: #211546;
+  font-family: 'Avenir', 'Avenir Next', sans-serif;
+}
+
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+
+/* Gentle fade-in used when opening the site and switching pages */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Welcome screen */
+#welcome {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  background: #f3eee4;
+  isolation: isolate;
+  animation: fadeIn 0.7s ease both;
+}
+
+#welcome::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 1000px;
+  height: 1000px;
+  left: var(--mouse-x, 50%);
+  top: var(--mouse-y, 50%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255, 220, 92, 0.62) 0%,
+    rgba(255, 224, 125, 0.35) 34%,
+    rgba(255, 232, 165, 0.15) 55%,
+    rgba(255, 238, 190, 0) 72%);
+  pointer-events: none;
+  transition: left 0.12s ease-out, top 0.12s ease-out;
+}
+
+#welcome h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 80px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0 0 22px;
+}
+
+.welcome-note {
+  color: #77736d;
+  margin: 0 0 30px;
+}
+
+.button {
+  border: 0;
+  border-radius: 20px;
+  background: #291563;
+  color: white;
+  padding: 13px 28px;
+}
+
+.button:hover { background: #211546; }
+
+/* Main website */
+#app {
+  display: none;
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--page-bg, #f3eee4);
+  color: var(--text-color, #211546);
+  transition: background-color 0.3s ease;
+}
+
+#app::before {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  width: 1000px;
+  height: 1000px;
+  left: var(--mouse-x, 50vw);
+  top: var(--mouse-y, 50vh);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    var(--glow-inner, rgba(255, 220, 92, 0.62)) 0%,
+    var(--glow-middle, rgba(255, 224, 125, 0.35)) 34%,
+    var(--glow-outer, rgba(255, 232, 165, 0.15)) 55%,
+    transparent 72%);
+  pointer-events: none;
+  transition: left 0.12s ease-out, top 0.12s ease-out;
+}
+
+#app.opening { animation: fadeIn 0.6s ease both; }
+
+#app > nav, #app > main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Each page keeps its original background and glow colors */
+#app.theme-record {
+  --page-bg: #e2a76c;
+  --glow-inner: rgba(144, 47, 18, 0.62);
+  --glow-middle: rgba(158, 44, 18, 0.32);
+  --glow-outer: rgba(199, 83, 33, 0.10);
+  --text-color: #000000;
+  --muted-color: #1d1f23;
+}
+
+#app.theme-logs {
+  --page-bg: #3a5faf;
+  --glow-inner: rgba(255, 137, 45, 0.58);
+  --glow-middle: rgba(255, 158, 77, 0.30);
+  --glow-outer: rgba(255, 184, 119, 0.10);
+  --text-color: #000000;
+  --muted-color: #1d1f23;
+}
+
+#app.theme-insights {
+  --page-bg: #6861a9;
+  --glow-inner: rgba(45, 47, 180, 0.58);
+  --glow-middle: rgba(53, 50, 232, 0.347);
+  --glow-outer: rgba(93, 67, 178, 0.17);
+  --text-color: #f7f3fb;
+  --muted-color: #d0d5e8;
+}
+
+#app.theme-web {
+  --page-bg: #0c0221;
+  --glow-inner: rgba(119, 115, 159, 0.62);
+  --glow-middle: rgba(119, 115, 159, 0.30);
+  --glow-outer: rgba(119, 115, 159, 0.10);
+  --text-color: #f7f3fb;
+  --muted-color: #c4c8df;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 20px 5%;
+  background: transparent;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--text-color, #211546);
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nav-links button {
+  font-family: 'Avenir', 'Avenir Next', sans-serif;
+  font-weight: 400;
+  background: transparent;
+  color: var(--text-color, #211546);
+  border: 0;
+  padding: 8px 10px;
+}
+
+.nav-links button.active {
+  border-bottom: 1px solid #000000;
+  color: var(--text-color, #000000);
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 42px 24px 70px;
+}
+
+.page { display: none; }
+
+.page.active {
+  display: block;
+  animation: fadeIn 0.5s ease both;
+}
+
+/* Main page headings */
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0 0 12px;
+  color: var(--text-color, #292b49);
+}
+
+.subheading {
+  color: var(--muted-color, #77788e);
+  margin: 0 0 28px;
+}
+
+/* Dream entry display */
+.form-wrap {
+  max-width: 600px;
+  margin: 10px auto;
+}
+
+label {
+  display: block;
+  margin: 22px 0 8px;
+  font-family: 'Avenir', 'Avenir Next', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-color, #292b49);
+  opacity: 1;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-color, #292b49);
+  opacity: 1;
+  font-family: 'Avenir', 'Avenir Next', sans-serif;
+  font-weight: 400;
+}
+
+textarea {
+  min-height: 150px;
+  resize: none;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--muted-color, #211546);
+  opacity: 0.9;
+}
+
+.form-wrap .button {
+  display: block;
+  margin: 24px 0 0;
+  min-width: 140px;
+}
+
+.prototype-note {
+  color: var(--muted-color, #211546);
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 18px;
+}
+
+/* Static journal logs */
+.entry {
+  background: rgb(255 255 255 /10%);
+  border: 1px transparent;
+  border-radius: 6px;
+  padding: 22px;
+  margin: 22px 0;
+}
+
+.entry h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 10px;
+}
+
+.entry p:not(.entry-date):not(.entry-words) {
+  line-height: 1.7;
+}
+
+.entry-date {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgb(40, 208, 255);
+  margin: 0 0 10px;
+}
+
+.entry-words {
+  color: rgb(40, 208, 255);
+  font-size: 13px;
+  font-weight: 400;
+  margin: 14px 0 0;
+}
+
+/* Static dream web illustration */
+.dream-web-art {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  overflow: hidden;
+}
+
+.dream-web-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+}
+
+.web-lines {
+  stroke: #c7bfdc;
+  stroke-width: 1;
+}
+
+.web-dots circle {
+  fill: rgb(119 115 159/ 70%);;
+  stroke: #faf8f6;
+  stroke-width: 1;
+}
+
+
+.web-labels {
+  fill: var(--text-color, #454563);
+  font-family: 'Avenir', 'Avenir Next', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  text-anchor: middle;
+}
+
+/* Static insights */
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.insight-card {
+  border: 1px transparent;
+  background:  rgb(255 255 255 /10%);
+  border-radius: 9px;
+  padding: 22px;
+}
+
+.insight-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 10px;
+}
+
+.muted {
+  color: var(--muted-color, #77788e);
+  line-height: 1.7;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  nav {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  main { padding: 30px 16px; }
+
+  #welcome::before {
+    width: 1000px;
+    height: 1000px;
+  }
+
+  .nav-links { gap: 2px; }
+
+  .nav-links button { padding: 8px; }
+
+  #app::before {
+    width: 1000px;
+    height: 1000px;
+  }
+}
+
+/* Respect visitors who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  #welcome, #app.opening, .page.active {
+    animation: none;
+  }
+}
