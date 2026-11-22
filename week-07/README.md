@@ -1,6 +1,10 @@
 What I did this week:
+
+
 I wanted to use Javascript to mimic flashcards so when someone clicks on a flashcard it flips to the other side (show a different card).
+
 Field Notes:
+
 Consider your original design, the finished website, and what happened when others visited it.
 
 I think I still want to work on the background colors a bit. After recieiving feedback from the class, I think my design for the user experience is successful. I also enjoyed seeing how everyone else thought about their site's user experienece, which gave me some inspirations. For example, I think after learning more javascript, I want to experiment with animation in my site to give more user feedback and make it feel more interactive. Additionally, I think I will also focus more on the storytelling aspect of my site. I want to rework the wording and text, which i think will make the experience feel more immersive. 
