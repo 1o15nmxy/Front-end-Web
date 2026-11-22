@@ -1,23 +1,15 @@
-.chart-row {
-    display: grid;
-    grid-template-columns: 180px minmax(0, 1fr) 50px;
-    gap: 12px;
-    align-items: center;
-    margin: 12px 0;
-  }
-  
-  .bar {
-    background: teal;
-    height: 24px;
-  }
-  
-  @media (max-width: 600px) {
-    .chart-row {
-      grid-template-columns: 1fr;
-      gap: 4px;
-    }
-  
-    .bar {
-      max-width: 100%;
-    }
-  }
+body { font-family: sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; line-height: 1.5; }
+#chart { position: relative; height: 160px; }
+.row {
+  position: absolute;            /* each row is placed with "top" */
+  display: flex; align-items: center;
+  transition: top 0.6s ease;     /* animate when "top" changes */
+}
+.name { width: 170px; }
+.bar {
+  background: #c0602b; height: 22px; margin-right: 8px;
+  transition: width 0.6s ease;   /* animate when "width" changes */
+}
+table { border-collapse: collapse; margin-top: 8px; }
+th, td { border: 1px solid #ccc; padding: 4px 10px; text-align: left; }
+button { margin-right: 6px; }

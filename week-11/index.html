@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Museum Exhibits</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Popular Isn't the Same as Loved</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Exhibition visiting time</h1>
-  <div id="chart"></div>
+<h1>Popular Isn't the Same as Loved</h1>
+<p>Which museum room is the "best"? It depends on what you measure.</p>
 
-  <h2>Where Everyone Goes</h2>
-  <p>The three most visited exhibits.</p>
-  <div id="most-visited"></div>
+<p>Rank rooms by:
+  <button onclick="draw('visitors')">Visitors</button>
+  <button onclick="draw('attention')">Total attention</button>
+</p>
 
-  <h2>The Places People Love</h2>
-  <p>Exhibits rated 4.5 or higher.</p>
-  <div id="most-loved"></div>
+<p id="summary"></p>
+<div id="chart"></div>
 
-  <h2>Where Time Disappears</h2>
-  <p>The three exhibits where visitors stay longest (average minutes).</p>
-  <div id="most-time"></div>
+<h2>Data table</h2>
+<table>
+  <thead>
+    <tr><th>Room</th><th>Visitors</th><th>Minutes</th><th>Total attention</th><th>Rating</th></tr>
+  </thead>
+  <tbody id="table"></tbody>
+</table>
 
-    <script src="script.js"></script>
+<h2>About the data</h2>
+<p>Source: <a href="museum.csv">museum.csv</a>.</p>
 
+<script src="script.js"></script>
 </body>
 </html>

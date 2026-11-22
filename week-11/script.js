@@ -1,38 +1,63 @@
-const exhibits = [
-    { name: "The Mirror Room", visitors: 120, minutes: 12, rating: 4.8 },
-    { name: "The Forgotten Garden", visitors: 80, minutes: 25, rating: 4.9 },
-    { name: "The Clock Tower", visitors: 200, minutes: 5, rating: 3.2 },
-    { name: "The Whispering Hall", visitors: 60, minutes: 40, rating: 4.7 },
-    { name: "The Empty Gallery", visitors: 150, minutes: 2, rating: 2.1 }
-  ];
 
+let rooms = [];
 
+// Load the CSV file and turn each line into an object
+fetch("museum.csv")
+  .then(response => response.text())
+  .then(text => {
+    const lines = text.trim().split("\n");
+    lines.shift(); // remove the header row
 
-const chart = document.querySelector("#chart");
+    rooms = lines.map(line => {
+      const [name, visitors, minutes, rating] = line.split(",");
+      return {
+        name: name,
+        visitors: Number(visitors),
+        minutes: Number(minutes),
+        rating: Number(rating)
+      };
+    });
 
-const maxVisitors = Math.max(
-  ...exhibits.map(exhibit => exhibit.minutes)
-);
+    // Transformation: add a new value to each room
+    rooms.forEach(room => {
+      room.attention = room.visitors * room.minutes;
+    });
 
-exhibits.forEach(exhibit => {
+    fillTable();
+    makeRows();
+    draw("visitors");
+  });
 
-  const row = document.createElement("div");
-  row.className = "chart-row";
+// Make one row per room, once. Later we only move them.
+function makeRows() {
+  document.getElementById("chart").innerHTML = rooms.map((room, i) => `
+    <div class="row" id="row-${i}">
+      <span class="name">${room.name}</span>
+      <span class="bar"></span>
+      <span class="value"></span>
+    </div>`).join("");
+}
 
-  const label = document.createElement("span");
-  label.textContent = exhibit.name;
+// Sort, then slide each row to its new position
+function draw(measure) {
+  const sorted = [...rooms].sort((a, b) => b[measure] - a[measure]);
+  const biggest = sorted[0][measure];
 
-  const bar = document.createElement("div");
-  bar.className = "bar";
+  sorted.forEach((room, position) => {
+    const row = document.getElementById("row-" + rooms.indexOf(room));
+    row.style.top = position * 32 + "px";   // new place in the ranking
+    row.querySelector(".bar").style.width = room[measure] / biggest * 300 + "px";
+    row.querySelector(".value").textContent = room[measure];
+  });
 
-  const width = exhibit.minutes/ maxVisitors * 100;
+  document.getElementById("summary").textContent =
+    measure === "visitors"
+      ? "By visitors, The Clock Tower wins."
+      : "By total attention (visitors × minutes), The Whispering Hall wins, even though it has the fewest visitors.";
+}
 
-  bar.style.width = `${width}%`;
-
-  const value = document.createElement("span");
-  value.textContent = exhibit.minutes;
-
-  row.append(label, bar, value);
-  chart.append(row);
-
-});
+// Fill the table
+function fillTable() {
+  document.getElementById("table").innerHTML = rooms.map(room => `
+    <tr><td>${room.name}</td><td>${room.visitors}</td><td>${room.minutes}</td><td>${room.attention}</td><td>${room.rating}</td></tr>`).join("");
+}
